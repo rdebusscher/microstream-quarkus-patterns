@@ -44,3 +44,55 @@ Without any integration code, you need to expose a (Quarkus) CDI bean for the `S
 The CDI producer method performs the different steps in a similar way as when you use MicroStream in a Java SE program.  It creates the `EmbeddedStorageFoundation` with the configuration file, it customizes the Foundation, creates the _StorageManager_, and initializes with data if needed.
 
 The Quarkus beans are only created when requested. This means that the _StorageManager_ is only created when the first request arrives and thus lazily initialised which is what is required for most applications.
+
+# Proposed changes
+
+The following is the list of proposed changes to make the code (of your application) better structured and integration with MicroStream easier.
+
+The examples require the code from https://github.com/microstream-one/microstream/pull/422 to compile and work.
+
+You can add the MicroStream extension to the Quarkus application using the following command
+
+```
+mvn quarkus:add-extension -Dextensions="one.microstream:microstream-extension:08.00.00-MS-GA-SNAPSHOT"
+```
+
+# Foundation customizer
+
+See directory _foundation-customizer_
+
+The _StorageManager_ configuration can be customized and storage initialized by using CDI beans based on some interface. These are the steps that are performed by the integration code:
+
+- Build `EmbeddedStorageFoundation` from the MicroProfile Configuration values
+- Allow customizations by the developer to `EmbeddedStorageFoundation` using `EmbeddedStorageFoundationCustomizer` beans.
+- Integration creates the `StorageManager`
+- Allow initialization of the `StorageManager` (like adding initial data when storage is created at the first run) through `StorageManagerInitializer`.
+
+The code within the `DataConfiguration` of the _plain_ example becomes now better structured and results in the classes `FoundationCustomizer` and `RootPreparation`.
+
+```
+@ApplicationScoped
+public class FoundationCustomizer implements EmbeddedStorageFoundationCustomizer {
+
+    @Override
+    public void customize(EmbeddedStorageFoundation embeddedStorageFoundation) {
+      // Do customization
+    }
+}
+```
+
+```
+@ApplicationScoped
+public class RootPreparation implements StorageManagerInitializer {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(RootPreparation.class);
+
+    @Override
+    public void initialize(StorageManager storageManager) {
+       // Check if Root is available (and assign if needed) and add initial data if needed.
+    }
+}    
+```
+
+The addition of these 2 interfaces and using them when the Bean for the _StorageManager_ is created, makes the code better structured as each class has its own purpose.
+It also allows to make use of all the MicroProfile Config sources that your runtime supports to define the configuration of the MicroStream engine.
