@@ -96,3 +96,23 @@ public class RootPreparation implements StorageManagerInitializer {
 
 The addition of these 2 interfaces and using them when the Bean for the _StorageManager_ is created, makes the code better structured as each class has its own purpose.
 It also allows to make use of all the MicroProfile Config sources that your runtime supports to define the configuration of the MicroStream engine.
+
+# Root CDI Bean
+
+See directory _root-bean_.
+
+Within the _Service_ beans, we accessed the Root object through the _StorageManager_ bean.  Although this works, it is a bit cumbersome to always retrieve the root in that way.
+
+The integration has the option to turn the Root object into a CDI Bean by annotating it with `@Storage`.
+
+```
+@Storage
+public class Root {
+
+    @Inject
+    transient StorageManager storageManager;
+```
+
+The _storage_ annotation is a custom annotation that is recognised by the Quarkus annotation. The processor makes sure the instance of this class is turned into a bean from the StorageManager and even create a default instance of it when the storage does not have data yet.
+
+Since it is a normal Bean, you can also inject other beans into it, like the _StorageManager_. Since the integration is responsible for creating the Root object instance if needed (through a special factory method) using standard Java constructs, only Field injection is allowed (and not constructor or setter injection)
