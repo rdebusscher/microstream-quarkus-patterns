@@ -2,6 +2,8 @@
 
 The v2 directory contains the examples with Quarkus 2.x. v3 is for Quarkus 3.x
 
+You the code within https://github.com/microstream-one/microstream/pull/565 for the Quarkus 3 extension.
+
 Patterns in using MicroStream's Quarkus integration
 
 This repository contains a few example projects that demonstrate how MicroStream and
@@ -56,8 +58,10 @@ The examples require the code from https://github.com/microstream-one/microstrea
 You can add the MicroStream extension to the Quarkus application using the following command
 
 ```
-mvn quarkus:add-extension -Dextensions="one.microstream:microstream-extension:08.00.00-MS-GA-SNAPSHOT"
+mvn quarkus:add-extension -Dextensions="one.microstream:microstream-quarkus-extension:08.00.00-MS-GA"
 ```
+
+When using Quarkus 3, the extension is `one.microstream:microstream-quarkus3-extension:09.00.00-MS-GA-SNAPSHOT`
 
 # Foundation customizer
 
