@@ -8,9 +8,11 @@
     <version>1.0.0-SNAPSHOT</version>
     <properties>
         <maven.compiler.release>11</maven.compiler.release>
-        <microstream.version>08.00.00-MS-GA-SNAPSHOT</microstream.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <quarkus.platform.version>2.12.0.Final</quarkus.platform.version>
+
+        <microstream.version>08.00.00-MS-GA</microstream.version>
+        <quarkus.platform.version>2.16.7.Final</quarkus.platform.version>
+
         <skipITs>true</skipITs>
         <surefire-plugin.version>3.0.0-M7</surefire-plugin.version>
     </properties>
