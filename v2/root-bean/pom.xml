@@ -42,7 +42,7 @@
 
         <dependency>
             <groupId>one.microstream</groupId>
-            <artifactId>microstream-extension</artifactId>
+            <artifactId>microstream-quarkus-extension</artifactId>
           <version>${microstream.version}</version>
         </dependency>
     </dependencies>

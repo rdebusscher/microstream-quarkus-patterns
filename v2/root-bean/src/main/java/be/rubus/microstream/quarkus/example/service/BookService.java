@@ -11,17 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @ApplicationScoped
-public class BookService {
-
-    @Inject
-    StorageManager storageManager;
-
-    private Root root;
-
-    @PostConstruct
-    void init() {
-        root = (Root) storageManager.root();
-    }
+public class BookService extends AbstractService {
 
     public List<Book> getAll() {
         return root.getBooks();
