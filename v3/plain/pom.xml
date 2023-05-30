@@ -14,7 +14,7 @@
 
         <skipITs>true</skipITs>
         <surefire-plugin.version>3.0.0-M7</surefire-plugin.version>
-        <microstream.version>08.00.00-MS-GA</microstream.version>
+        <microstream.version>08.01.00-MS-GA</microstream.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -25,13 +25,14 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
     <dependencies>
         <dependency>
             <groupId>io.quarkiverse.microprofile</groupId>
             <artifactId>quarkus-microprofile</artifactId>
-            <version>3.0.0.Alpha3</version>
+            <version>3.0.0.Final</version>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>

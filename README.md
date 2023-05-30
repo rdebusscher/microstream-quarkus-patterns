@@ -2,7 +2,7 @@
 
 The v2 directory contains the examples with Quarkus 2.x. v3 is for Quarkus 3.x
 
-You the code within https://github.com/microstream-one/microstream/pull/565 for the Quarkus 3 extension.
+When using Quarkus 3 extension, you need version 8.1, whereas version 8.0 of Microstream contains the extension for Quarkus 2.
 
 Patterns in using MicroStream's Quarkus integration
 
